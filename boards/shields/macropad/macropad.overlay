@@ -8,6 +8,7 @@
         // Stripe toward row -> col2row. Stripe toward column -> row2col
         // (then move GPIO_PULL_DOWN to col-gpios).
         diode-direction = "col2row";
+        wakeup-source;
 
         // Rows = black wires (via diodes), cols = red wires.
         row-gpios
@@ -16,9 +17,15 @@
             , <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>  // P0.11
             ;
         col-gpios
-            = <&pro_micro 2 GPIO_ACTIVE_HIGH>  // P0.17
+            = <&pro_micro 4 GPIO_ACTIVE_HIGH>  // P0.22
             , <&pro_micro 3 GPIO_ACTIVE_HIGH>  // P0.20
-            , <&pro_micro 4 GPIO_ACTIVE_HIGH>  // P0.22
+            , <&pro_micro 2 GPIO_ACTIVE_HIGH>  // P0.17
             ;
+    };
+
+    // Any key in the matrix wakes the board from soft off.
+    soft_off_wakers {
+        compatible = "zmk,soft-off-wakeup-sources";
+        wakeup-sources = <&kscan0>;
     };
 };
