@@ -1,0 +1,8 @@
+services:
+  build:
+    build: .
+    volumes:
+      - .:/cfg
+    environment:
+      BOARD: nice_nano_v2
+      SHIELD: macropad
